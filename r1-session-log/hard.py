@@ -1,4 +1,6 @@
 import sys
+import time
+
 
 if len(sys.argv) < 3:
     print("Введите название файлов")
@@ -12,6 +14,7 @@ else:
     peak = [0, 0]
     time_sum = 0
     times = {}
+    print(log_file, res_file, file=sys.stderr)
 
     try:
         with open(log_file, 'r', encoding='utf-8', errors='replace') as file:
@@ -21,6 +24,7 @@ else:
 
 
     with open(res_file, 'w', encoding='utf-8') as file:
+        start_time = time.perf_counter()
         for log in logs:
             log = log.split()
             string_count += 1
@@ -63,3 +67,7 @@ else:
         if session_count != 0:
             avg_duration = time_sum / session_count
             print(f"# stats: avg_duration={avg_duration}", file=sys.stderr)
+
+            end_time = time.perf_counter()
+            exec_time = end_time - start_time
+            print(exec_time, file=sys.stderr)
