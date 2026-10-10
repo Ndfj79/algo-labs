@@ -73,6 +73,8 @@ def main():
             to_close -= 1
             active -= 1
     sys.stdout.write("\n".join(out) + "\n")
+    with open("1.in", "w", encoding='utf-8') as f:
+        f.write("\n".join(out) + "\n")
     print(f"# ground truth: peak_concurrent={peak} at line={peak_line}", file=sys.stderr)
     if timestamps:
         avg = duration_sum / n
